@@ -1,7 +1,7 @@
 
 
 # video-streamer
-video streamer with token system for authentication
+HTTP video streamer with token system for authentication
 
 #installation
 1. sudo apt-get install nodejs apache2 mysql-server php5 php5-mysql php5-gd motion libmysqlclient-dev libcurl4-openssl-dev pkg-config
