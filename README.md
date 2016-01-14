@@ -13,4 +13,6 @@ video streamer with token system for authentication
 7. sudo nano /etc/motion/motion.conf
 8. -- change to stream_localhost off
 9. sudo chown -R pi /var/lib/motion; sudo chmod -R u+rX /var/lib/motion
+10. git clone https://github.com/physiii/video-streamer.git
+11. make;sudo make install
 10. [still editing]
