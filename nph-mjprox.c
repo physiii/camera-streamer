@@ -76,7 +76,7 @@ int get_token();
 void unencode();
 void get_mac();
 int check_token(char *,char *);
-int store_token(char *,char *,char *);
+int store_token(char *,char *,char *,char *,char *);
 int get_local_token(char *,char *,char *,char *);
 int get_new_token(char *,char *,char *,char *,char *,char *,char *);
 
@@ -141,7 +141,8 @@ int main()
   printf("<div><input name='tkn' value='0' type='hidden'></div>\n");    
   printf("<div><label>Username: <input name='user' size='5'></label></div>\n");
   printf("<div><label>Password: <input name='password' size='5'></label></div>\n");
-  printf("<div><label>Device Name: <input name='device_name' size='5'></label></div>\n");  
+  printf("<div><label>Device Name: <input name='device_name' size='5'></label></div>\n");
+  printf("<div><label>Device Port: <input name='device_port' size='5'></label></div>\n");    
   printf("<div><label>Server: <input name='server' size='5'></label></div>\n");
   printf("<div><input type='submit' value='Login'></div>\n");
   printf("</form>\n");
@@ -170,7 +171,7 @@ int main()
       sscanf(tmp,"password=%s",password);      
     } 
     if (strncmp(tmp, "device_name=", 12) == 0) { 
-      sscanf(tmp,"device_name=%s",device_name);      
+      sscanf(tmp,"device_name=%s",device_name);   
     }
     if (strncmp(tmp, "device_port=", 5) == 0) { 
       sscanf(tmp,"device_port=%s",device_port);      
@@ -180,19 +181,23 @@ int main()
     }    
     p = strtok (NULL, "&");
   }
-
+  
+  strcpy(server,"68.12.157.176:8080/pyfi.org");
+  //server = "68.12.157.176:8080/pyfi.org";
   if (strncmp(remote_token, "0", 1) == 0) { 
     if(get_new_token(mac_address,user,password,local_token,device_name,device_port,server)){
-      store_token(mac_address,user,local_token);
+      store_token(mac_address,user,local_token,device_name,device_port);
       printf("<<-- stored local token: %s \n-->>",local_token);          
       authorized = 1;
     }
   }
+  
   printf("remote_token: %s",remote_token);
   if (check_token(user,remote_token)){
     printf("remote_token: %s",remote_token);
     authorized = 1;
   }
+  
   //authorized = 0;
   if (authorized){
     int sockfd;
@@ -203,6 +208,7 @@ int main()
     char *querystr;
     char *dummy;
     char buffer[65536];
+    
     /*Get camera number from querystring  */
     cameranumber=1;
     querystr = getenv("QUERY_STRING");
@@ -295,7 +301,7 @@ int create_tables(void)
   {
       fprintf(stderr, "%s\n", mysql_error(con));
       return 0;
-  }  
+  }
 
   if (mysql_real_connect(con, "localhost", "root", "password", 
           "device", 0, NULL, 0) == NULL) 
@@ -303,7 +309,7 @@ int create_tables(void)
       finish_with_error(con);
   }    
 
-  if (mysql_query(con, "create table video_tok(timestamp text, user text, token text, mac text, port text)")) {      
+  if (mysql_query(con, "create table video_tok(timestamp text, user text, token text, mac text, device_name text, port text)")) {      
     fprintf(stderr, "%s\n", mysql_error(con));
     mysql_close(con);
     return 0;
@@ -359,7 +365,7 @@ void get_mac(char * mac_address)
   }
 }
 
-int store_token(char * mac_address,char * user,char * token)
+int store_token(char * mac_address,char * user,char * token,char * device_name,char * device_port)
 {
   MYSQL *con = mysql_init(NULL);
 
@@ -375,8 +381,8 @@ int store_token(char * mac_address,char * user,char * token)
       finish_with_error(con);
   }    
 
-  char query[200] = "";
-  snprintf(query,sizeof(query),"insert into video_tok values(now(),'%s','%s','%s','%s')",user,token,mac_address,"8282");
+  char query[400] = "";
+  snprintf(query,sizeof(query),"insert into video_tok values(now(),'%s','%s','%s','%s','%s')",user,token,mac_address,device_name,device_port);
   printf("store_token: %s",query);
   if (mysql_query(con, query)) {
       finish_with_error(con);
@@ -442,7 +448,7 @@ int get_new_token(char * mac_address,char * user,char * password,char * token,ch
 {
   CURL *curl;
   CURLcode res; 
-    
+
   char url[200] = "http://";
   strcat(url,server);
   strcat(url,"/php/set_video.php?mac=");
@@ -455,6 +461,7 @@ int get_new_token(char * mac_address,char * user,char * password,char * token,ch
   strcat(url,device_port);
   strcat(url,"&device_name=");  
   strcat(url,device_name);
+
   printf("<<-- url: %s \n-->><br><br>",url);
   curl = curl_easy_init();
   if(curl) {
@@ -472,7 +479,7 @@ int get_new_token(char * mac_address,char * user,char * password,char * token,ch
     curl_easy_cleanup(curl);
     int len = strlen(token);
     
-    if (len != 128) {
+    if (len < 128) {
       printf("invalid username or password");
       return 0;
     }
