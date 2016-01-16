@@ -14,6 +14,6 @@ HTTP video streamer with token system for authentication
 13. -- change to stream_localhost off
 14. sudo chown -R pi /var/lib/motion; sudo chmod -R u+rX /var/lib/motion
 15. clone repository into web directory
-16. -- sudo git clone https://github.com/physiii/media-server.git /var/www/html
+16. -- sudo git clone https://github.com/physiii/security-camera.git /var/www/html
 17. -- sudo cp nph-mjprox /usr/lib/cgi-bin
 20. [still editing]
