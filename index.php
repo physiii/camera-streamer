@@ -6,19 +6,11 @@
 
 <link href="lib/ionic/css/ionic.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
-<link href="css/style2.css" rel="stylesheet">
 <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
-<!-- ionic/angularjs js -->
-<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-<script src="lib/ionic/js/ionic.bundle.js"></script>
-<!-- your app's js -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
 <script src="js/app.js"></script>
 <script src="js/controllers.js"></script>
-
+<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
 <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
 
   </head>
@@ -30,7 +22,8 @@
     Link Account
   </div>
   <div class="card">
-    <div ng-app="camera" ng-controller="post_ctrl">
+    <div ng-controller="post_ctrl">
+    Full Name: {{firstName + " " + lastName}}
       <div class="item item-text-wrap">
         <div class="list">
           <label class="item item-input">
@@ -45,7 +38,7 @@
           <label class="item item-input">
             <input type="text" ng-model="port" placeholder="Port">
           </label>          
-          <input class="button button-block button-dark" ng-click="set()" value="Link">
+          <button class="button button-block button-dark" ng-click="set()">Link</button>
           <h3>
             <a style="float:right" href="http://pyfi.org/account/register">Not a member yet? Register here.</a>
           </h3>
@@ -65,7 +58,6 @@
     </div>
   </div>
 </div>  
-
 </div>  
 <div class="card">
   <div class="item item-divider">

@@ -1,9 +1,7 @@
-var app = angular.module('camera', ['ionic']);
-app.controller('myCtrl', function($scope) {
+var app = angular.module('starter', ['ionic'])
+.controller('post_ctrl', function($scope,$http) {
     $scope.firstName = "John";
     $scope.lastName = "Doe";
-});
-app.controller('post_ctrl', function($scope,$http) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////
   $http.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';  
   var param = function(obj) {
