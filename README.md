@@ -12,7 +12,7 @@ HTTP video streamer with token system for authentication
 11. -- change to start_motion_daemon=yes
 12. sudo nano /etc/motion/motion.conf
 13. -- change to stream_localhost off
-14. sudo chown -R pi /var/lib/motion; sudo chmod -R u+rX /var/lib/motion
+14. sudo chown -R pi /var; sudo chmod -R u+rX /var
 15. clone repository into web directory
 16. -- sudo git clone https://github.com/physiii/security-camera.git /var/www/html
 17. -- sudo cp nph-mjprox /usr/lib/cgi-bin
