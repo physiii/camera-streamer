@@ -16,4 +16,3 @@ HTTP video streamer with token system for authentication
 15. clone repository into web directory
 16. -- sudo git clone https://github.com/physiii/security-camera.git /var/www/html
 17. -- sudo cp nph-mjprox /usr/lib/cgi-bin
-20. [still editing]
