@@ -4,7 +4,7 @@
 HTTP video streamer with token system for authentication
 
 #installation
-1. sudo apt-get install nodejs apache2 mysql-server php5 php5-mysql php5-gd motion libmysqlclient-dev libcurl4-openssl-dev pkg-config tmux
+1. sudo apt-get install apache2 mysql-server php5 php5-mysql php5-gd motion libmysqlclient-dev libcurl4-openssl-dev
 3. mysql -u root -p
 5. create database device;
 6. sudo a2enmod rewrite cgi
