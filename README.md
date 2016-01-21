@@ -1,6 +1,6 @@
 
 
-# video-streamer
+# camera-streamer
 HTTP video streamer with token system for authentication
 
 #installation
