@@ -6,7 +6,7 @@ HTTP video streamer with token system for authentication
 #installation
 1. sudo apt-get install apache2 mysql-server php5 php5-mysql php5-gd motion libmysqlclient-dev libcurl4-openssl-dev
 3. mysql -u root -p
-5. create database device;
+5. -- create database device;
 10. sudo nano /etc/default/motion
 11. -- change to start_motion_daemon=yes
 12. sudo nano /etc/motion/motion.conf
