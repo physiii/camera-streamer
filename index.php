@@ -17,13 +17,12 @@
 <body ng-app="starter">
 <ion-content>
 
-<div class="card">
+<div class="card" ng-controller="post_ctrl">
   <div class="item item-divider">
     Link Account
   </div>
   <div class="card">
-    <div ng-controller="post_ctrl">
-    Full Name: {{firstName + " " + lastName}}
+    <div>
       <div class="item item-text-wrap">
         <div class="list">
           <label class="item item-input">
@@ -31,13 +30,7 @@
           </label>
           <label class="item item-input">
             <input type="text" ng-model="password" placeholder="Password">
-          </label>        
-          <label class="item item-input">
-            <input type="text" ng-model="device_name" placeholder="Device's Name">
-          </label>
-          <label class="item item-input">
-            <input type="text" ng-model="port" placeholder="Port">
-          </label>          
+          </label>         
           <button class="button button-block button-dark" ng-click="set()">Link</button>
           <h3>
             <a style="float:right" href="http://pyfi.org/account/register">Not a member yet? Register here.</a>
@@ -45,6 +38,48 @@
         </div>  
       </div>
     </div>
+</div>
+</div>
+
+<div class="card" ng-controller="device_info">
+  <div class="item item-divider">
+    Device Info
+  </div>
+  <div class="card">
+    <ul class="list">
+      <li class="item" id="li_device_name">
+        Device Name  <b>{{ device_name }}</b>
+        <button ng-click="edit_device_name('show')" style="float:right" class="ion-edit"></button>        
+      </li>
+      <li style="display:none" class="item" id="input_device_name">
+        <input style="width:100%" type="text" placeholder="enter device name ({{ device_name }})">
+        <button ng-click="edit_device_name()" class="button-block">set</button>
+      </li>
+      <li class="item" id="li_device_port">
+        Port  <b>{{ device_port }}</b>
+        <button ng-click="edit_device_port('show')" style="float:right" class="ion-edit"></button>        
+      </li>
+      <li style="display:none" class="item" id="input_device_port">
+        <input style="width:100%" type="text" placeholder="enter port number ({{ device_port }})">
+        <button ng-click="edit_device_port()" class="button-block">set</button>
+      </li>    
+      <li class="item">
+        Local Internet Address  <b>{{ local_ip }}</b>
+      </li>
+      <li class="item">
+        Public Internet Address  <b>{{ public_ip }}</b>
+      </li>
+      <li class="item">
+        Machine Address  <b>{{ machine_address }}</b>
+      </li>       
+    </ul>
+  </div>
+  <div class="card">
+      <li class="item">
+        <button class="button button-block button-dark">Update</button>
+        <button style="float:right" class="button button-small button-assertive">Reboot</button>
+      </li>
+  </div>  
 </div>
 
 <div class="card">
@@ -57,38 +92,8 @@
       </div>
     </div>
   </div>
-</div>  
-</div>  
-<div class="card">
-  <div class="item item-divider">
-    Device Settings
-  </div>
-  <div class="card">
-    <ul class="list">
-      <li class="item">
-        Device Name  <b>Camera 1</b>
-        <button style="float:right" class="ion-edit"></button>
-      </li>   
-      <li class="item">
-        Machine Address  <b>b827eb91903b</b>
-      </li>    
-      <li class="item">
-        Local Internet Address  <b>192.168.0.18</b>
-      </li>
-      <li class="item">
-        Public Internet Address  <b>68.12.157.176</b>
-      </li>
-      <li class="item">
-        Port  <b>3033</b>
-        <button style="float:right" class="ion-edit"></button>        
-      </li>
-      <li class="item">
-        <button class="button button-block button-balanced">Update</button>
-        <button style="float:right" class="button button-small button-assertive">Reboot</button>
-      </li>      
-    </ul> 
-  </div>
 </div>
+
 </ion-content>
 </body>
 </html>
